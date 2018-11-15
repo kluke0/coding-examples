@@ -1,10 +1,10 @@
 package com.kluke.examples;
 
-public class ArrayTest {
+public class BinarySearchExample {
 
   private final int[] someArray;
 
-  public ArrayTest(int[] someArray) {
+  public BinarySearchExample(int[] someArray) {
     this.someArray = someArray;
   }
 
