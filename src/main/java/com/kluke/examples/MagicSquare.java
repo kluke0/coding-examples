@@ -2,14 +2,15 @@ package com.kluke.examples;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class MagicSquare {
     public static void main(String[] args) {
         int[][] arr = {{5, 3, 4}, {1, 5, 8}, {6, 4, 2}};
-        System.out.println(solution(arr));
+        System.out.println(solution1(arr));
     }
 
-    private static int solution(int[][] inputArray) {
+    static int solution1(int[][] inputArray) {
         int[] flatArray = Arrays
                 .stream(inputArray)
                 .flatMapToInt(IntStream::of)
@@ -40,5 +41,37 @@ public class MagicSquare {
             array3[i] = Math.abs(array1[i] - array2[i]);
         }
         return array3;
+    }
+
+    static int solution2DoesntWork(int[][] multiArray) {
+        final Stream<Integer> test = Arrays
+                .stream(multiArray)
+                .flatMapToInt(Arrays::stream)
+                .boxed();
+
+        final Set<Integer> missing = new HashSet<>();
+        final Set<Integer> distinct = new HashSet<>();
+        final Set<Integer> duplicate = new HashSet<>();
+
+        test.forEach((integer) -> {
+            if (!distinct.add(integer)) {
+                duplicate.add(integer);
+            }
+        });
+
+        for (int i = 1; i <= 9; i++) {
+            if (distinct.add(i)) {
+                missing.add(i);
+            }
+        }
+
+        int[] differenceArray = new int[Math.min(missing.toArray().length, duplicate.toArray().length)];
+        int[] missingArray = missing.stream().mapToInt(x->x).toArray();
+        int[] duplicateArray = duplicate.stream().mapToInt(x->x).toArray();
+
+        for (int i = 0; i < differenceArray.length; i++) {
+            differenceArray[i] = Math.abs(missingArray[i] - duplicateArray[i]);
+        }
+        return IntStream.of(differenceArray).sum();
     }
 }
