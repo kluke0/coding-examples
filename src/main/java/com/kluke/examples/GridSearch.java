@@ -86,15 +86,28 @@ public class GridSearch {
 
   public static void main(String[] args) {
 
+    final String testString1 = "111111111111111";
+    final String testString2 = "456712";
+    final String matchString1 = "11111";
+    final String matchString2 = "45";
+    final int expectedMatches = 11; // ?
 
-//    System.out.println("==============");
-//    System.out.println(gridSearch2(testCase3, findMe3));
-//    System.out.println("==============");
-//    System.out.println(gridSearch2(testCase4, findMe4));
-//    System.out.println("==============");
-//    System.out.println(gridSearch2(testCase5, findMe5));
-    
-    gridSearch3(testCase4, findMe4);
+    Matcher matcher = Pattern.compile(matchString2).matcher(testString2);
+
+    int start = 0;
+    while (matcher.find(start)) {
+
+      System.out.println(matcher.group());
+      start = matcher.start() + 1;
+    }
+
+    System.out.println("==============");
+    System.out.println(gridSearch(testCase3, findMe3));
+    System.out.println("==============");
+    System.out.println(gridSearch(testCase4, findMe4));
+    System.out.println("==============");
+    System.out.println(gridSearch(testCase5, findMe5));
+
   }
 
 
@@ -102,14 +115,22 @@ public class GridSearch {
     for (int row = 0; row < testCase.length - findMe.length + 1; row++) {
 
       System.out.println("-----");
+      final List<String> list = new ArrayList<>();
 
       for (int x = 0; x < findMe.length; x++) {
         System.out.println("Find me: " + findMe[x] + " First loop: " + testCase[x + row]);
-        char[] testCaseChar = testCase[x + row].toCharArray();
+        final Matcher matcher = Pattern.compile(findMe[x]).matcher(testCase[x + row]);
 
-        System.out.println(testCaseChar[1]);
+        int start = 0;
+        while (matcher.find(start)) {
 
+          start = matcher.start() + 1;
+          list.add(matcher.group());
+          System.out.println(testCase[x + row].indexOf(matcher.group()));
+        }
       }
+      System.out.println(list);
+      list.clear();
     }
 
     return "";
