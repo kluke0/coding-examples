@@ -21,7 +21,6 @@ public class GraphImpl {
    * E        0
    * 
    */
-
   public static void main(String[] args) {
     Graph theGraph = new Graph()
         .addVertex('A')
@@ -36,6 +35,8 @@ public class GraphImpl {
 
     System.out.println("Visits: ");
     theGraph.dfs();
+    System.out.println();
+    System.out.println();
     System.out.println("=======");
     System.out.println();
     System.out.println("Visits: ");
