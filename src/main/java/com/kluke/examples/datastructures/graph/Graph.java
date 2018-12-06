@@ -1,8 +1,6 @@
 package com.kluke.examples.datastructures.graph;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Graph {
 
@@ -17,6 +15,7 @@ public class Graph {
     vertexList = new Vertex[MAX_VERTS];
     adjMat = new int[MAX_VERTS][MAX_VERTS];
     nVerts = 0;
+
 
     // Could also use Arrays.fill();
     for (int x = 0; x < MAX_VERTS; x++) {
